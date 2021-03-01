@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Signup from "./SingUp";
 import Login from "./Login";
 import "../styles/styles.css";
-import "./styles/signUpStyle.css";
+import "../styles/signUpStyle.css";
 
 export default function Home(props) {
   const [user, setUser] = useState({ username: "", password: "" });
