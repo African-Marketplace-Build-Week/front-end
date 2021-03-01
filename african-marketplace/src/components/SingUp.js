@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import axios from "axios";
 
 let initialValues = {
   name: "",
@@ -24,6 +28,20 @@ export default function Signup(props) {
   const [values, setValues] = useState(initialValues);
   const [disabled, setDisabled] = useState(initialDisabled);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [countries, setCountries] = useState([]);
+
+  axios
+    .get("https://restcountries.eu/rest/v2/region/africa")
+    .then((res) => {
+      setCountries(
+        res.data.map((country) => {
+          return country.name;
+        })
+      );
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -106,6 +124,20 @@ export default function Signup(props) {
         variant="outlined"
         size="small"
       />
+      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={values.country}
+        onChange={handleChange}
+      >
+        {countries.map((country) => {
+          return <MenuItem value={country}>{country}</MenuItem>;
+        })}
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
 
       <div className="container">
         <Button
