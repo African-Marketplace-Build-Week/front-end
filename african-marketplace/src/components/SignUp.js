@@ -7,8 +7,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import axios from "axios";
-import "../styles/signUpStyle.css";
-
 
 let initialValues = {
   name: "",
@@ -27,7 +25,7 @@ const initialFormErrors = {
 
 const initialDisabled = false;
 
-export default function Signup(props) {
+export default function Signup() {
   const [values, setValues] = useState(initialValues);
   const [disabled, setDisabled] = useState(initialDisabled);
   const [formErrors, setFormErrors] = useState(initialFormErrors);

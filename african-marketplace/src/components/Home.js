@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Signup from "./SingUp";
 import Login from "./Login";
-import "../styles/styles.css";
-import "../styles/signUpStyle.css";
+
 
 export default function Home(props) {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -21,12 +19,9 @@ export default function Home(props) {
       <div className="content">
         <h1>African Marketplace</h1>
         <nav>
-          <Router className="links">
-            <Link to="/signup" className="signup">
-              Sign Up
-            </Link>
-            <Route path="/signup" component={Signup} />
-          </Router>
+          <Link to="/signup" className="signup">
+            Sign Up
+          </Link>
         </nav>
         <Login Login={LoginFunction} error={error} />
       </div>
