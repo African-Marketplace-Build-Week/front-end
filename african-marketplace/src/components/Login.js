@@ -18,7 +18,7 @@ function LoginForm({ Login, error }) {
           })
           .catch((err) => {
             console.log(
-              "Error:",
+              "Error: ",
               err.response.data.message
             );
           });  
