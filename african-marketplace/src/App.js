@@ -11,7 +11,7 @@ function App() {
         <Link to="/signup">Sign Up</Link>
         <Link to="/login">Log In</Link>
         {/* <Route exact path="/" component={Home} /> */}
-        {/* <Route path="/signup" component={Signup} /> */}
+        <Route path="/signup" component={Signup} />
         {/* <Route path="/login" component={Login} /> */}
       </Router>
     </div>
