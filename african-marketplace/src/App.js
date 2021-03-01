@@ -1,11 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./styles/styles.css";
-import Signup from "./components/SingUp";
+import Home from './components/Home';
 
 function App() {
   return (
     <div className="App">
+
+      <Home />
+
       <Router>
         <Link to="/">Home</Link>
         <Link to="/signup">Sign Up</Link>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/signup" component={Signup} />
         {/* <Route path="/login" component={Login} /> */}
       </Router>
+
     </div>
   );
 }

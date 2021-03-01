@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+}
+
+.background {
+    background-image: url('./images/pexels-markus-spiske-4040333.jpg');
+    background-size: 100% 100vh;
+    background-repeat: no-repeat;
+    width: 40%;
+    height: 100vh;
+  }
+  
+  .Home {
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background: rosybrown;
+    height: 100%;
+    width: 100%;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  nav {
+    display:flex;
+    justify-content: center;
+    border: 1px black;
+    text-decoration: none;
+    width: 30%;
+  }
+.login {
+    text-decoration: none;
+    padding: 10px 30px;
+    background: rgb(182, 81, 81);
+    color: white;
+}
+.signup {
+    text-decoration: none;
+    padding: 10px 30px;
+    background: rgb(182, 81, 81);
+    color: white;
+}
+
+input, button {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+form {
+    display: block;
+    position: relative;
+}
+
+form:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+form .form-inner {
+    position: relative;
+    display: block;
+    z-index: 2;
+    background-color: white;
+    padding: 30px
+
+}
+
+form .form-inner h2 {
+    color: #888;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+form .form-inner .form-group {
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+form .form-inner .form-group label {
+    display: block;
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    transition: .5s;
+}
+
+form .form-inner .form-group:focus-within label {
+    color: #FE4880;
+}
+
+form .form-inner .form-group input {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #d8d7d7;
+    border-radius: 8px;
+    transition: .3s;
+}
+
+form .form-inner .form-group input:focus {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+form .form-inner input[type='submit'] {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 0%;
+    transition: .5s;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form .form-inner input[type='submit']:hover {
+    background-position: 100% 0%;
+}
