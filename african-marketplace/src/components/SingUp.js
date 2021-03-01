@@ -5,7 +5,10 @@ import Icon from "@material-ui/core/Icon";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
 import axios from "axios";
+import "../styles/signUpStyle.css";
+
 
 let initialValues = {
   name: "",
@@ -124,20 +127,20 @@ export default function Signup(props) {
         variant="outlined"
         size="small"
       />
-      <InputLabel id="demo-simple-select-label">Age</InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={values.country}
-        onChange={handleChange}
-      >
-        {countries.map((country) => {
-          return <MenuItem value={country}>{country}</MenuItem>;
-        })}
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
+
+      <FormControl className="formControl">
+        <InputLabel id="demo-simple-select-label">Country</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={values.country}
+          onChange={handleChange}
+        >
+          {countries.map((country) => {
+            return <MenuItem value={`${country}`}>{country}</MenuItem>;
+          })}
+        </Select>
+      </FormControl>
 
       <div className="container">
         <Button
