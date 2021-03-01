@@ -1,10 +1,26 @@
 import React, { useState } from 'react'
+import axiosWithAuth from "../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 function LoginForm({ Login, error }) {
     const [details, setDetails] = useState({email: '', password: ''});
+
+    const { push } = useHistory();
+
     const submitHandler = e => {
         e.preventDefault();
-        Login(details)
+        axiosWithAuth()
+          .post("/users/login", details)
+          .then((res) => {
+            localStorage.setItem("token", res.data.token);
+            push(`${res.data.user.id}/dashboard`);
+          })
+          .catch((err) => {
+            console.log(
+              "Error:",
+              err.response.data.message
+            );
+          });  
     }
     return (
         <form onSubmit={submitHandler}>
