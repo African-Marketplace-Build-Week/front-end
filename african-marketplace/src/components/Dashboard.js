@@ -6,7 +6,7 @@ export default function Home(props) {
     
     return (
       <>
-      Testing from in Dashboard
+      Hello from inside the Dashboard
       </>
     );
   }

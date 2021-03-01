@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
@@ -30,6 +32,8 @@ export default function Signup() {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [countries, setCountries] = useState([]);
+
+  const { push } = useHistory();
 
   axios
     .get("https://restcountries.eu/rest/v2/region/africa")
@@ -76,20 +80,24 @@ export default function Signup() {
     postNewUser(newUser);
   };
 
-  const postNewUser = (newUser) => {
-    // axios
-    //   .post("https://reqres.in/api/users", newUser)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    setValues(initialValues);
+
+  //Registration Submit ---------------------
+  const postNewUser = (event) => {
+    event.preventDefault();
+    axiosWithAuth()
+      .post("/users/register", values)
+      .then((response) => {
+        console.log("Sign up success:", response);
+        push("/login");
+      })
+      .catch((error) => {
+        console.log("Sign up error", error.response.data.message); 
+        setFormErrors();
+      });
   };
 
   return (
-    <form className="form container" onSubmit={submitForm}>
+    <form className="form container" onSubmit={postNewUser}>
       <TextField
         className="textField"
         id="outlined-basic"
