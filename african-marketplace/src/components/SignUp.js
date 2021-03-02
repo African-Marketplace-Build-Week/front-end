@@ -30,20 +30,28 @@ const initialFormErrors = {
 const initialDisabled = false;
 
 const Form = styled.form`
-
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  color: #202020;
+  background-image: url("https://images7.alphacoders.com/912/912808.jpg");
+  background-size: 100%;
   box-sizing: border-box;
   display: flex;
-  border-radius: 3px;
-  border: 2px solid white;
   flex-direction: column;
   flex-wrap: wrap;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   padding: 50px;
   align-items: space-between;
   justify-content: space-between;
   align-content: center;
   justify-items: space-between;
+
+  h1 {
+    font-size: 1.4rem;
+    padding-bottom: 20px;
+    font-weight: 300;
+  }
   .formControl {
     width: 50%;
     max-height: 50px;
@@ -57,6 +65,9 @@ const Form = styled.form`
   }
   .formchild {
     width: 60%;
+  }
+  textarea {
+    background: transparent;
   }
   .innerContainer {
     box-sizing: border-box;
@@ -140,6 +151,7 @@ export default function Signup() {
 
   return (
     <Form className="form container" onSubmit={submitForm}>
+      <h1>Sign Up Now It's Free!</h1>
       <TextField
         className="formchild"
         name="name"
