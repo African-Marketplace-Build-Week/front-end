@@ -2,61 +2,69 @@ import React, { useState } from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
+import border from '../styles/images/border.png';
 
 function LoginForm({ Login, error }) {
   const [details, setDetails] = useState({email: '', password: ''});
 
   const { push } = useHistory();
 
-  const submitHandler = e => {
-      e.preventDefault();
-      axiosWithAuth()
-        .post("/users/login", details)
-        .then((res) => {
-          localStorage.setItem("token", res.data.token);
-          push(`${res.data.user.id}/dashboard`);
-        })
-        .catch((err) => {
-          console.log(
-            "Error: ",
-            err.response.data.message
-          );
-        });  
-  }
+//Submit Handler posts to Login
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/users/login", details)
+      .then((res) => {
+        console.log("Login Details: ", res);
+        localStorage.setItem("token", res.data.token);
+        push(); 
+      })
+      .catch((err) => {
+        console.log(
+          "Error:", 
+          err.response.data.message
+        );
+      });
+  };
   const LogForm = styled.form`
     display: block;
     position: relative;
     margin: 20px;
     width: 40%;
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      z-index: 1;
-      background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
-    }
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    border-style: solid;
+    border-width: 20px;
+    border-image: url(${border});
+    border-image-slice: 80;
   `;
   const FormInner = styled.form`
     position: relative;
     display: block;
     z-index: 2;
-    background-color: white;
+    ;
     padding: 30px;
   `;
   const LoginH2 = styled.h2`
-    color: #fe4880;
+    color: rgb(182, 81, 81);
     font-size: 2rem;
+    text-shadow: 1px 1px 1px white;
     font-weight: bold;
     margin-bottom: 30px;
+    font-family: 'Poppins';
   `;
   const FormGroup = styled.div`
     display: block;
     width: 300px;
     margin-bottom: 15px;
+    text-align: left;
+  `;
+  const Label = styled.label`
+    color: black;
+    font-size: 1.2rem;
   `;
   const LoginInput = styled.input`
     display: block;
@@ -71,9 +79,9 @@ function LoginForm({ Login, error }) {
   `;
   const LoginSubmit = styled.input`
     display: inline-block;
-    padding: 10px 15px;
-    border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    padding: 10px 25px;
+    border-radius: 3px;
+    background-image: linear-gradient(to right, rgb(182, 81, 81) 50%, rgb(182, 81, 81) 50%, #ffffff);
     background-size: 200%;
     background-position: 0%;
     transition: .5s;
@@ -89,11 +97,11 @@ function LoginForm({ Login, error }) {
           <FormInner>
               <LoginH2>Login</LoginH2>
               <FormGroup>
-                  <label htmlFor='email'>Email:</label>
+                  <Label htmlFor='email'>Email:</Label>
                   <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={e => setDetails({...details, email: e.target.value})} value={details.email}/>
               </FormGroup>
               <FormGroup>
-                  <label htmlFor='password'>Password:</label>
+                  <Label htmlFor='password'>Password:</Label>
                   <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
               </FormGroup>
               <LoginSubmit type='submit' value='Log In' />
