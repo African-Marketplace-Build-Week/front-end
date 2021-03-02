@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
+import border from '../styles/images/border.png';
 
 function LoginForm({ Login, error }) {
   const [details, setDetails] = useState({email: '', password: ''});
@@ -28,23 +29,21 @@ function LoginForm({ Login, error }) {
     position: relative;
     margin: 20px;
     width: 40%;
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      z-index: 1;
-      background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
-    }
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    border-style: solid;
+    border-width: 20px;
+    border-image: url(${border});
+    border-image-slice: 80;
   `;
   const FormInner = styled.form`
     position: relative;
     display: block;
     z-index: 2;
-    background-color: #f0f0f0;
+    ;
     padding: 30px;
   `;
   const LoginH2 = styled.h2`
@@ -65,7 +64,7 @@ function LoginForm({ Login, error }) {
   `;
   const LoginInput = styled.input`
     display: block;
-    width: 100%;
+    width: 90%;
     padding: 10px 15px;
     background-color: #d8d7d7;
     border-radius: 8px;
@@ -78,7 +77,7 @@ function LoginForm({ Login, error }) {
     display: inline-block;
     padding: 10px 15px;
     border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-image: linear-gradient(to right, rgb(182, 81, 81) 50%, rgb(182, 81, 81) 50%, #ffffff);
     background-size: 200%;
     background-position: 0%;
     transition: .5s;

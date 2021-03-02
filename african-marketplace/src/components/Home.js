@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Login from "./Login";
 import styled from 'styled-components';
-import image from '../styles/images/pexels-markus-spiske-4040333.jpg'
+import image from '../styles/images/pexels-markus-spiske-4040333.jpg';
+
 
 
 export default function Home(props) {
