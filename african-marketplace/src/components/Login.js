@@ -44,11 +44,11 @@ function LoginForm({ Login, error }) {
     position: relative;
     display: block;
     z-index: 2;
-    background-color: white;
+    background-color: #f0f0f0;
     padding: 30px;
   `;
   const LoginH2 = styled.h2`
-    color: #fe4880;
+    color: #4e4e4e;
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 30px;
@@ -57,6 +57,11 @@ function LoginForm({ Login, error }) {
     display: block;
     width: 300px;
     margin-bottom: 15px;
+    text-align: left;
+  `;
+  const Label = styled.label`
+    color: black;
+    font-size: 1.2rem;
   `;
   const LoginInput = styled.input`
     display: block;
@@ -89,11 +94,11 @@ function LoginForm({ Login, error }) {
           <FormInner>
               <LoginH2>Login</LoginH2>
               <FormGroup>
-                  <label htmlFor='email'>Email:</label>
+                  <Label htmlFor='email'>Email:</Label>
                   <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={e => setDetails({...details, email: e.target.value})} value={details.email}/>
               </FormGroup>
               <FormGroup>
-                  <label htmlFor='password'>Password:</label>
+                  <Label htmlFor='password'>Password:</Label>
                   <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
               </FormGroup>
               <LoginSubmit type='submit' value='Log In' />
