@@ -11,6 +11,8 @@ import FormControl from "@material-ui/core/FormControl";
 import axios from "axios";
 import styled from "styled-components";
 import "../styles/styles.css";
+import * as yup from "yup";
+import validationForm from "./validationForm";
 
 let initialValues = {
   name: "",
@@ -27,13 +29,14 @@ const initialFormErrors = {
   country: "",
 };
 
-const initialDisabled = false;
+const initialDisabled = true;
 
 const Form = styled.form`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 300;
   color: white;
   background-image: url("https://images7.alphacoders.com/912/912808.jpg");
+  background-position: 50% 30%;
   background-size: 100%;
   box-sizing: border-box;
   display: flex;
@@ -61,6 +64,16 @@ const Form = styled.form`
     display: flex;
     justify-content: center;
     margin: 0 30px 10px 30px;
+  }
+  .errors {
+    border-radius: 3px;
+    color: red;
+    background: rgb(43, 43, 46);
+    background: linear-gradient(
+      53deg,
+      rgba(43, 43, 46, 1) 0%,
+      rgba(0, 0, 0, 0.5914740896358543) 0%
+    );
   }
   .formControl {
     width: 50%;
@@ -130,15 +143,15 @@ export default function Signup() {
   };
 
   const updateForm = (inputName, inputValue) => {
-    // yup
-    //   .reach(formSchema, inputName)
-    //   .validate(inputValue)
-    //   .then(() => {
-    //     setFormErrors({ ...formErrors, [inputName]: "" });
-    //   })
-    //   .catch((err) => {
-    //     setFormErrors({ ...formErrors, [inputName]: err.errors[0] });
-    //   });
+    yup
+      .reach(validationForm, inputName)
+      .validate(inputValue)
+      .then(() => {
+        setFormErrors({ ...formErrors, [inputName]: "" });
+      })
+      .catch((err) => {
+        setFormErrors({ ...formErrors, [inputName]: err.errors[0] });
+      });
     setValues({
       ...values,
       [inputName]: inputValue,
@@ -170,6 +183,10 @@ export default function Signup() {
         setFormErrors();
       });
   };
+
+  useEffect(() => {
+    validationForm.isValid(values).then((valid) => setDisabled(!valid));
+  }, [values]);
 
   return (
     <Form className="form container" onSubmit={submitForm}>
@@ -251,12 +268,12 @@ export default function Signup() {
           >
             submit
           </Button>
-          {/* <div className="errors">
-          <div>{errors.name}</div>
-          <div>{errors.email}</div>
-          <div>{errors.password}</div>
-          <div>{errors.terms}</div>
-        </div> */}
+          <div className="errors">
+            <div>{formErrors.name}</div>
+            <div>{formErrors.email}</div>
+            <div>{formErrors.password}</div>
+            <div>{formErrors.country}</div>
+          </div>
         </div>
       </div>
     </Form>
