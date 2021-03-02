@@ -97,7 +97,7 @@ export default function Signup() {
   };
 
   return (
-    <form className="form container" onSubmit={postNewUser}>
+    <form className="form container" onSubmit={submitForm}>
       <TextField
         className="textField"
         id="outlined-basic"

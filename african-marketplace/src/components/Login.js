@@ -8,21 +8,23 @@ function LoginForm({ Login, error }) {
 
   const { push } = useHistory();
 
-  const submitHandler = e => {
-      e.preventDefault();
-      axiosWithAuth()
-        .post("/users/login", details)
-        .then((res) => {
-          localStorage.setItem("token", res.data.token);
-          push(`${res.data.user.id}/dashboard`);
-        })
-        .catch((err) => {
-          console.log(
-            "Error: ",
-            err.response.data.message
-          );
-        });  
-  }
+//Submit Handler posts to Login
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/users/login", details)
+      .then((res) => {
+        console.log("Login Details: ", res);
+        localStorage.setItem("token", res.data.token);
+        push(); 
+      })
+      .catch((err) => {
+        console.log(
+          "Error:", 
+          err.response.data.message
+        );
+      });
+  };
   const LogForm = styled.form`
     display: block;
     position: relative;
