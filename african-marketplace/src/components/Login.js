@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
+import border from '../styles/images/border.png';
 
 function LoginForm({ Login, error }) {
   const [details, setDetails] = useState({email: '', password: ''});
@@ -30,30 +31,30 @@ function LoginForm({ Login, error }) {
     position: relative;
     margin: 20px;
     width: 40%;
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      z-index: 1;
-      background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
-    }
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    border-style: solid;
+    border-width: 20px;
+    border-image: url(${border});
+    border-image-slice: 80;
   `;
   const FormInner = styled.form`
     position: relative;
     display: block;
     z-index: 2;
-    background-color: #f0f0f0;
+    ;
     padding: 30px;
   `;
   const LoginH2 = styled.h2`
-    color: #4e4e4e;
+    color: rgb(182, 81, 81);
     font-size: 2rem;
+    text-shadow: 1px 1px 1px white;
     font-weight: bold;
     margin-bottom: 30px;
+    font-family: 'Poppins';
   `;
   const FormGroup = styled.div`
     display: block;
@@ -78,9 +79,9 @@ function LoginForm({ Login, error }) {
   `;
   const LoginSubmit = styled.input`
     display: inline-block;
-    padding: 10px 15px;
-    border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    padding: 10px 25px;
+    border-radius: 3px;
+    background-image: linear-gradient(to right, rgb(182, 81, 81) 50%, rgb(182, 81, 81) 50%, #ffffff);
     background-size: 200%;
     background-position: 0%;
     transition: .5s;
