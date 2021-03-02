@@ -9,7 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import axios from "axios";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import "../styles/styles.css";
 
 let initialValues = {
@@ -28,6 +28,44 @@ const initialFormErrors = {
 };
 
 const initialDisabled = false;
+
+const Form = styled.form`
+
+  box-sizing: border-box;
+  display: flex;
+  border-radius: 3px;
+  border: 2px solid white;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 90vh;
+  padding: 50px;
+  align-items: space-between;
+  justify-content: space-between;
+  align-content: center;
+  justify-items: space-between;
+  .formControl {
+    width: 50%;
+    max-height: 50px;
+  }
+
+  .formControl div {
+    min-width: 80%;
+  }
+  .submitContainer {
+    width: 25%;
+  }
+  .formchild {
+    width: 60%;
+  }
+  .innerContainer {
+    box-sizing: border-box;
+    width: 60%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+`;
 
 export default function Signup() {
   const [values, setValues] = useState(initialValues);
@@ -72,7 +110,6 @@ export default function Signup() {
       ...values,
       [inputName]: inputValue,
     });
-    console.log(values);
   };
 
   const submitForm = () => {
@@ -101,30 +138,10 @@ export default function Signup() {
       });
   };
 
-  const Form = styled.form`
-    box-sizing: border-box;
-    display: flex;
-    border-radius: 3px;
-    border: 2px solid white;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100vw;
-    height: 90vh;
-    padding: 50px;
-    align-items: space-between;
-    justify-content: space-between;
-    /* align-content: space-between;
-    justify-items: space-between; */
-    .formchild {
-      width: 60%;
-    }
-  `;
-
   return (
-    <Form className="form container" onSubmit={postNewUser}>
+    <Form className="form container" onSubmit={submitForm}>
       <TextField
         className="formchild"
-        id="outlined-basic"
         name="name"
         label="Name"
         value={values.name}
@@ -134,7 +151,6 @@ export default function Signup() {
         size="small"
       />
       <TextField
-        id="outlined-basic"
         name="email"
         className="formchild"
         type="email"
@@ -146,7 +162,6 @@ export default function Signup() {
         size="small"
       />
       <TextField
-        id="outlined-basic"
         name="password"
         className="formchild"
         type="password"
@@ -158,7 +173,6 @@ export default function Signup() {
         size="small"
       />
       <textarea
-        id="outlined-basic"
         name="user_info"
         className="formchild"
         type="textarea"
@@ -169,42 +183,47 @@ export default function Signup() {
         variant="outlined"
         size="small"
       />
+      <div className="innerContainer">
+        <FormControl className="formControl">
+          <InputLabel id="demo-simple-select-label">Country</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            className="formchild"
+            name="country"
+            value={values.country}
+            onChange={handleChange}
+          >
+            {countries.map((country, i) => {
+              return (
+                <MenuItem key={i} value={`${country}`}>
+                  {country}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
 
-      <FormControl className="formControl">
-        <InputLabel id="demo-simple-select-label">Country</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          className="formchild"
-          name="country"
-          value={values.country}
-          onChange={handleChange}
-        >
-          {countries.map((country) => {
-            return <MenuItem value={`${country}`}>{country}</MenuItem>;
-          })}
-        </Select>
-      </FormControl>
-
-      <div className="container">
-        <Button
-          type="submit"
-          className="submit"
-          value="submit"
-          disabled={disabled}
-          variant="contained"
-          color="primary"
-          size="small"
-          endIcon={<Icon>send</Icon>}
-        >
-          submit
-        </Button>
-        {/* <div className="errors">
+        <div className="submitContainer">
+          <Button
+            type="submit"
+            className="submit"
+            value="submit"
+            disabled={disabled}
+            variant="contained"
+            color="primary"
+            size="small"
+            endIcon={<Icon>send</Icon>}
+          >
+            submit
+          </Button>
+          {/* <div className="errors">
           <div>{errors.name}</div>
           <div>{errors.email}</div>
           <div>{errors.password}</div>
           <div>{errors.terms}</div>
         </div> */}
+        </div>
       </div>
     </Form>
   );
