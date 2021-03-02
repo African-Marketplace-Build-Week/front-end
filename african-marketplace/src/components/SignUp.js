@@ -32,7 +32,7 @@ const initialDisabled = false;
 const Form = styled.form`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 300;
-  color: #202020;
+  color: white;
   background-image: url("https://images7.alphacoders.com/912/912808.jpg");
   background-size: 100%;
   box-sizing: border-box;
@@ -49,8 +49,18 @@ const Form = styled.form`
 
   h1 {
     font-size: 1.4rem;
-    padding-bottom: 20px;
+    padding: 3px;
     font-weight: 300;
+    background: rgb(43, 43, 46);
+    background: linear-gradient(
+      53deg,
+      rgba(43, 43, 46, 1) 0%,
+      rgba(0, 0, 0, 0.5914740896358543) 0%
+    );
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    margin: 0 30px 10px 30px;
   }
   .formControl {
     width: 50%;
@@ -63,8 +73,20 @@ const Form = styled.form`
   .submitContainer {
     width: 25%;
   }
+
+  .MuiInputBase-input {
+    color: white;
+  }
   .formchild {
+    border-radius: 3px;
+    color: white;
     width: 60%;
+    background: rgb(43, 43, 46);
+    background: linear-gradient(
+      53deg,
+      rgba(43, 43, 46, 1) 0%,
+      rgba(0, 0, 0, 0.5914740896358543) 0%
+    );
   }
   textarea {
     background: transparent;
