@@ -64,9 +64,9 @@ export default function Home(props) {
 
   const Title = styled.h1`
     font-size: 3rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Poppins';
     color: rgb(182, 81, 81);
-    text-shadow: 4px 4px 0px white;
+    text-shadow: 2px 2px 2px white;
   `;
 //end of styles
 

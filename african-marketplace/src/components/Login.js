@@ -47,10 +47,12 @@ function LoginForm({ Login, error }) {
     padding: 30px;
   `;
   const LoginH2 = styled.h2`
-    color: #4e4e4e;
+    color: rgb(182, 81, 81);
     font-size: 2rem;
+    text-shadow: 1px 1px 1px white;
     font-weight: bold;
     margin-bottom: 30px;
+    font-family: 'Poppins';
   `;
   const FormGroup = styled.div`
     display: block;
@@ -64,7 +66,7 @@ function LoginForm({ Login, error }) {
   `;
   const LoginInput = styled.input`
     display: block;
-    width: 90%;
+    width: 100%;
     padding: 10px 15px;
     background-color: #d8d7d7;
     border-radius: 8px;
@@ -75,8 +77,8 @@ function LoginForm({ Login, error }) {
   `;
   const LoginSubmit = styled.input`
     display: inline-block;
-    padding: 10px 15px;
-    border-radius: 8px;
+    padding: 10px 25px;
+    border-radius: 3px;
     background-image: linear-gradient(to right, rgb(182, 81, 81) 50%, rgb(182, 81, 81) 50%, #ffffff);
     background-size: 200%;
     background-position: 0%;
