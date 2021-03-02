@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import image from '../styles/images/pexels-markus-spiske-4040333.jpg';
 
 
 
 export default function Home(props) {
   // styles
+  const slideLeft = keyframes`
+    from { transform: translateX(100%);  }
+    to { transform: translateX(0%); }
+  `;
+  const slideDown = keyframes`
+    from { transform: translateY(-100%);  }
+    to { transform: translateY(0%); }
+  `;
+  const fadeIn = keyframes`
+    0% {opacity: 0}
+    50% {opacity: 0}
+    100% {opacity: 1}
+  `;
+
   const HomePage = styled.div`
     text-align: center;
     width: 100vw;
@@ -21,6 +35,8 @@ export default function Home(props) {
     background-repeat: no-repeat;
     width: 40%;
     height: 100vh;
+    animation-name: ${slideDown};
+    animation-duration: 1s;
   `;
 
   const Container = styled.div`
@@ -32,6 +48,8 @@ export default function Home(props) {
     height: 100%;
     width: 100%;
     color: white;
+    animation-name: ${slideLeft};
+    animation-duration: 1s;
   `;
 
   const Nav = styled.nav`
@@ -40,6 +58,8 @@ export default function Home(props) {
     border: 1px black;
     text-decoration: none;
     width: 30%;
+    animation-name: ${fadeIn};
+    animation-duration: 2s;
     a {
       border: 0 solid;
       text-decoration: none;
@@ -67,7 +87,11 @@ export default function Home(props) {
     font-family: 'Poppins';
     color: rgb(182, 81, 81);
     text-shadow: 2px 2px 2px white;
+    animation-name: ${fadeIn};
+    animation-duration: 2s;
   `;
+
+  
 //end of styles
 
   const [user, setUser] = useState({ username: "", password: "" });
