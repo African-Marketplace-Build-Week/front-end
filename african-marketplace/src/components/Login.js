@@ -4,69 +4,8 @@ import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import border from '../styles/images/border.png';
 
-function LoginForm({ Login, error }) {
-  const [details, setDetails] = useState({email: '', password: ''});
 
-  const { push } = useHistory();
-
-  const onChange = (e) => {
-    setDetails({
-      ...details,
-      [e.target.name]: e.target.value,
-    });
-    console.log(e.target.value)
-  
-  };
- 
-  
-//Submit Handler posts to Login
-  const submitHandler = (e) => {
-    push('/dashboard')
-    console.log('clicking')
-    // e.preventDefault();
-    // push('/dashboard')
-    // axiosWithAuth()
-    //   .post("/users/login", details)
-    //   .then((res) => {
-    //     console.log("Login Details: ", res);
-    //     localStorage.setItem("token", res.data.token);
-    //     push('/dashboard'); 
-    //   })
-    //   .catch((err) => {
-    //     push('/dashboard'); 
-    //     console.log(
-    //       "Error:", 
-    //       err.response.data.message
-    //     );
-    //   });
-  };
-  
-  return (
-    <>
-      <LogForm submit={submitHandler}>
-          <FormInner>
-              <LoginH2>Login</LoginH2>
-              <FormGroup>
-                  <Label htmlFor='email'>Email:</Label>
-                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' />
-              </FormGroup>
-              <FormGroup>
-                  <Label htmlFor='password'>Password:</Label>
-                  <LoginInput type='password' name ='password' id='password' placeholder='Password' />
-              </FormGroup>
-              <LoginSubmit  type='submit' />
-              
-          </FormInner>
-          
-      </LogForm>
-      <button type='submit' onClick=''>submit</button>
-      </>
-  )
-}
-
-export default LoginForm;
-
-const LogForm = styled.form`
+  const LogForm = styled.form`
     display: block;
     position: relative;
     margin: 20px;
@@ -154,3 +93,54 @@ const LogForm = styled.form`
       background-position: 100% 0%;
     }
   `;
+  
+function LoginForm({ Login, error }) {
+  const [details, setDetails] = useState({email: '', password: ''});
+
+  const { push } = useHistory();
+
+//Submit Handler posts to Login
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/users/login", details)
+      .then((res) => {
+        console.log("Login Details: ", res);
+        localStorage.setItem("token", res.data.token);
+        push(); 
+      })
+      .catch((err) => {
+        console.log(
+          "Error:", 
+          err.response.data.message
+        );
+      });
+  };
+
+//onChange handler
+  const changeHandler = e => {
+    const { value, name } = e.target;
+    setDetails({ ...details, [name]: value})
+  };
+
+  return (
+      <LogForm onSubmit={submitHandler}>
+          <FormInner>
+              <LoginH2>Login</LoginH2>
+              <FormGroup>
+                  <Label htmlFor='email'>Email:
+                    <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={changeHandler} value={details.email}/>
+                  </Label>
+              </FormGroup>
+              <FormGroup>
+                  <Label htmlFor='password'>Password:
+                    <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={changeHandler} value={details.password}/>
+                  </Label>
+              </FormGroup>
+              <LoginSubmit type='submit' value='Log In' />
+          </FormInner>
+      </LogForm>
+  )
+}
+
+export default LoginForm;
