@@ -101,6 +101,7 @@ function LoginForm({ Login, error }) {
 
 //Submit Handler posts to Login
   const submitHandler = (e) => {
+    push('/dashboard')
     e.preventDefault();
     axiosWithAuth()
       .post("/users/login", details)
@@ -124,6 +125,7 @@ function LoginForm({ Login, error }) {
   };
 
   return (
+    <>
       <LogForm onSubmit={submitHandler}>
           <FormInner>
               <LoginH2>Login</LoginH2>
@@ -137,9 +139,11 @@ function LoginForm({ Login, error }) {
                     <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={changeHandler} value={details.password}/>
                   </Label>
               </FormGroup>
-              <LoginSubmit type='submit' value='Log In' />
+              <LoginSubmit type='submit' onClick={submitHandler} value='Log In'   />
           </FormInner>
       </LogForm>
+      
+      </>
   )
 }
 
