@@ -4,28 +4,7 @@ import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import border from '../styles/images/border.png';
 
-function LoginForm({ Login, error }) {
-  const [details, setDetails] = useState({email: '', password: ''});
 
-  const { push } = useHistory();
-
-//Submit Handler posts to Login
-  const submitHandler = (e) => {
-    e.preventDefault();
-    axiosWithAuth()
-      .post("/users/login", details)
-      .then((res) => {
-        console.log("Login Details: ", res);
-        localStorage.setItem("token", res.data.token);
-        push(); 
-      })
-      .catch((err) => {
-        console.log(
-          "Error:", 
-          err.response.data.message
-        );
-      });
-  };
   const LogForm = styled.form`
     display: block;
     position: relative;
@@ -114,17 +93,49 @@ function LoginForm({ Login, error }) {
       background-position: 100% 0%;
     }
   `;
+  
+function LoginForm({ Login, error }) {
+  const [details, setDetails] = useState({email: '', password: ''});
+
+  const { push } = useHistory();
+
+//Submit Handler posts to Login
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/users/login", details)
+      .then((res) => {
+        console.log("Login Details: ", res);
+        localStorage.setItem("token", res.data.token);
+        push(); 
+      })
+      .catch((err) => {
+        console.log(
+          "Error:", 
+          err.response.data.message
+        );
+      });
+  };
+
+//onChange handler
+  const changeHandler = e => {
+    const { value, name } = e.target;
+    setDetails({ ...details, [name]: value})
+  };
+
   return (
       <LogForm onSubmit={submitHandler}>
           <FormInner>
               <LoginH2>Login</LoginH2>
               <FormGroup>
-                  <Label htmlFor='email'>Email:</Label>
-                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={e => setDetails({...details, email: e.target.value})} value={details.email}/>
+                  <Label htmlFor='email'>Email:
+                    <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={changeHandler} value={details.email}/>
+                  </Label>
               </FormGroup>
               <FormGroup>
-                  <Label htmlFor='password'>Password:</Label>
-                  <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
+                  <Label htmlFor='password'>Password:
+                    <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={changeHandler} value={details.password}/>
+                  </Label>
               </FormGroup>
               <LoginSubmit type='submit' value='Log In' />
           </FormInner>
