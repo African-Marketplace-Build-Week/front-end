@@ -10,12 +10,11 @@ function LoginForm({ Login, error }) {
   const { push } = useHistory();
 
   const onChange = (e) => {
-    e.preventDefault();
     setDetails({
       ...details,
       [e.target.name]: e.target.value,
     });
-    console.log(details)
+    console.log(e.target.value)
   
   };
  
@@ -137,11 +136,11 @@ function LoginForm({ Login, error }) {
               <LoginH2>Login</LoginH2>
               <FormGroup>
                   <Label htmlFor='email'>Email:</Label>
-                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={onChange} value={details.email}/>
+                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' />
               </FormGroup>
               <FormGroup>
                   <Label htmlFor='password'>Password:</Label>
-                  <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={onChange} value={details.password}/>
+                  <LoginInput type='password' name ='password' id='password' placeholder='Password' />
               </FormGroup>
               <LoginSubmit type='submit' />
           </FormInner>

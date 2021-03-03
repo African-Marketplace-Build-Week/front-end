@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { marketplaceArray } from '../data/Data'
+import YourItem from './YourItem'
 
 const initialValues = {
         category: "",
@@ -24,6 +25,13 @@ const onChange = (e) => {
 
 };
 
+const onSubmit = (e) => {
+  e.preventDefault();
+  return (
+    <YourItem />
+  )
+}
+
 
 
 
@@ -32,7 +40,7 @@ const onChange = (e) => {
      
     return (
       <div className='form-container'>
-      <form className='new-item-form1'>
+      <form onSubmit={onSubmit} className='new-item-form1'>
 <h2>Add new Item: </h2>
 <input 
 type='text'
@@ -80,11 +88,12 @@ onChange={onChange}
 placeholder='Seller Name...'
  />
 
- <button onClick={onChange}>submit</button>
+ <button type='submit'>submit</button>
   </form>
 
   <div className='your-items'>
     <h2>Your Items: </h2>
+    <p> { item.itemName } </p>
   </div>
       </div>
     );
