@@ -8,6 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
+import axios from "axios";
 import styled from "styled-components";
 import "../styles/styles.css";
 import * as yup from "yup";
@@ -40,13 +41,11 @@ const Main = styled.div`
   box-sizing: border-box;
   max-width: 100%;
   height: 100vh;
-
   .MuiAppBar-colorPrimary {
     color: black;
     background-color: #ffd7c0;
     background-image: linear-gradient(0deg, #ffd7c0 0%, #e09d74 100%);
   }
-
   .navtitle {
     flex-grow: 1;
   }
@@ -68,7 +67,6 @@ const Form = styled.form`
   align-content: center;
   justify-items: space-evenly;
   flex-grow: 1;
-
   h1 {
     font-size: 1.4rem;
     padding: 1%;
@@ -97,14 +95,12 @@ const Form = styled.form`
     width: 50%;
     max-height: 50px;
   }
-
   .formControl div {
     min-width: 80%;
   }
   .submitContainer {
     width: 25%;
   }
-
   .formchild {
     border-radius: 3px;
     width: 60%;
@@ -135,45 +131,25 @@ export default function Signup() {
 
   const { push } = useHistory();
 
-  // useEffect(() => {
-  //   axios
-  //     .get("https://restcountries.eu/rest/v2/region/africa")
-  //     .then((res) => {
-  //       setCountries(
-  //         res.data.map((country) => {
-  //           return country.name;
-  //         })
-  //       );
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   useEffect(() => {
-    axiosWithAuth()
-      .get("/countries")
-      .then((response) => {
-        setCountries(response.data);
-        console.log('Data Here:', response.data)
+    axios
+      .get("https://restcountries.eu/rest/v2/region/africa")
+      .then((res) => {
+        setCountries(
+          res.data.map((country) => {
+            return country.name;
+          })
+        );
       })
-      .catch((error) => {
-        console.log("countries error", error);
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
-  // const handleChange = (event) => {
-  //   const { name, value, type, checked } = event.target;
-  //   const valueToUse = type === "checkbox" ? checked : value;
-  //   updateForm(name, valueToUse);
-  // };
-
-  const handleChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-    console.log('Values:', values)
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const valueToUse = type === "checkbox" ? checked : value;
+    updateForm(name, valueToUse);
   };
 
   const updateForm = (inputName, inputValue) => {
@@ -192,32 +168,30 @@ export default function Signup() {
     });
   };
 
-  // const submitForm = () => {
-  //   const newUser = {
-  //     name: values.name.trim(),
-  //     email: values.email.trim(),
-  //     password: values.password.trim(),
-  //     country: values.country.trim(),
-  //     user_info: values.user_info.trim(),
-  //   };
-  //   postNewUser(newUser);
-  // };
+  const submitForm = () => {
+    push('/login')
+    const newUser = {
+      name: values.name.trim(),
+      email: values.email.trim(),
+      password: values.password.trim(),
+      country: values.country.trim(),
+      user_info: values.user_info.trim(),
+    };
+    postNewUser(newUser);
+  };
 
   //Registration Submit ---------------------
-  const submitRegistration = (e) => {
-    e.preventDefault();
+  const postNewUser = (event) => {
+    // event.preventDefault();
     axiosWithAuth()
-      .post("https://ialkamal-be-amp.herokuapp.com/api/users/register", values)
+      .post("/users/register", values)
       .then((response) => {
-        console.log("Registration submit success", response);
-        console.log(values)
+        console.log("Sign up success:", response);
         push("/login");
       })
       .catch((error) => {
-        console.log("Registration error", error.response.data.message);
-        console.log(values)
+        console.log("Sign up error", error.response.data.message);
         setFormErrors();
-        push("/login");
       });
   };
 
@@ -226,93 +200,102 @@ export default function Signup() {
   }, [values]);
 
   return (
-    <Main className="form container" onSubmit={submitRegistration}>
-      <h1>Sign Up Now It's Free!</h1>
-      <TextField
-        className="formchild"
-        name="name"
-        label="Name"
-        value={values.name}
-        onChange={handleChange}
-        maxLength="100"
-        variant="outlined"
-        size="small"
-      />
-      <TextField
-        name="email"
-        className="formchild"
-        type="email"
-        value={values.email}
-        onChange={handleChange}
-        maxLength="100"
-        label="Email"
-        variant="outlined"
-        size="small"
-      />
-      <TextField
-        name="password"
-        className="formchild"
-        type="password"
-        value={values.password}
-        onChange={handleChange}
-        maxLength="40"
-        label="Password"
-        variant="outlined"
-        size="small"
-      />
-      <textarea
-        name="user_info"
-        className="formchild"
-        type="textarea"
-        value={values.user_info}
-        onChange={handleChange}
-        maxLength="500"
-        placeholder="Information about you."
-        variant="outlined"
-        size="small"
-      />
-      <Form className="innerContainer">
-        <FormControl className="formControl">
-          <InputLabel id="demo-simple-select-label">Country</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            className="formchild"
-            name="country"
-            value={values.country}
-            onChange={handleChange}
-          >
-            {countries.map((country) => {
-              return (
-                <MenuItem 
-                key={country.id}
-                value={country.country}
-                defaultValue={country[0]}>
-                  {country.country}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-
-        <div className="submitContainer">
-          <Button
-            type="submit"
-            className="submit"
-            value="submit"
-            // disabled={disabled}
-            variant="contained"
-            color="primary"
-            size="small"
-            endIcon={<Icon>send</Icon>}
-          >
-            submit
+    <Main className="main">
+      <AppBar position="static" className="navbar">
+        <Toolbar>
+          <Typography variant="h6" className="navtitle">
+            African Market Place
+          </Typography>
+          <Button color="inherit">
+            <a href="/">Home</a>
           </Button>
-          <div className="errors">
-            {/* <div>{formErrors.name}</div>
-            <div>{formErrors.email}</div>
-            <div>{formErrors.password}</div>
-            <div>{formErrors.country}</div> */}
+        </Toolbar>
+      </AppBar>
+      <Form className="form container" onSubmit={submitForm}>
+        <h1>Sign Up Now It's Free!</h1>
+        <TextField
+          className="formchild"
+          name="name"
+          label="Name"
+          value={values.name}
+          onChange={handleChange}
+          maxLength="100"
+          variant="outlined"
+          size="small"
+        />
+        <TextField
+          name="email"
+          className="formchild"
+          type="email"
+          value={values.email}
+          onChange={handleChange}
+          maxLength="100"
+          label="Email"
+          variant="outlined"
+          size="small"
+        />
+        <TextField
+          name="password"
+          className="formchild"
+          type="password"
+          value={values.password}
+          onChange={handleChange}
+          maxLength="40"
+          label="Password"
+          variant="outlined"
+          size="small"
+        />
+        <textarea
+          name="user_info"
+          className="formchild"
+          type="textarea"
+          value={values.user_info}
+          onChange={handleChange}
+          maxLength="500"
+          placeholder="Information about you."
+          variant="outlined"
+          size="small"
+        />
+        <div className="innerContainer">
+          <FormControl className="formControl">
+            <InputLabel id="demo-simple-select-label">Country</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              className="formchild"
+              name="country"
+              value={values.country}
+              onChange={handleChange}
+            >
+              {countries.map((country, i) => {
+                return (
+                  <MenuItem key={i} value={`${country}`}>
+                    {country}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+
+          <div className="submitContainer">
+            <Button
+              type="submit"
+              className="submit"
+              value="submit"
+              disabled={disabled}
+              variant="contained"
+              color="primary"
+              size="small"
+              endIcon={<Icon>send</Icon>}
+            >
+              submit
+            </Button>
+            <div className="errors">
+              <div>{formErrors.name}</div>
+              <div>{formErrors.email}</div>
+              <div>{formErrors.password}</div>
+              <div>{formErrors.country}</div>
+            </div>
           </div>
         </div>
       </Form>

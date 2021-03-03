@@ -18,30 +18,55 @@ function LoginForm({ Login, error }) {
   
   };
  
-  const testSubmit = (e) => {
-    push('/dashboard')
-  }
-
+  
 //Submit Handler posts to Login
   const submitHandler = (e) => {
-    e.preventDefault();
     push('/dashboard')
-    axiosWithAuth()
-      .post("/users/login", details)
-      .then((res) => {
-        console.log("Login Details: ", res);
-        localStorage.setItem("token", res.data.token);
-        push('/dashboard'); 
-      })
-      .catch((err) => {
-        push('/dashboard'); 
-        console.log(
-          "Error:", 
-          err.response.data.message
-        );
-      });
+    console.log('clicking')
+    // e.preventDefault();
+    // push('/dashboard')
+    // axiosWithAuth()
+    //   .post("/users/login", details)
+    //   .then((res) => {
+    //     console.log("Login Details: ", res);
+    //     localStorage.setItem("token", res.data.token);
+    //     push('/dashboard'); 
+    //   })
+    //   .catch((err) => {
+    //     push('/dashboard'); 
+    //     console.log(
+    //       "Error:", 
+    //       err.response.data.message
+    //     );
+    //   });
   };
-  const LogForm = styled.form`
+  
+  return (
+    <>
+      <LogForm submit={submitHandler}>
+          <FormInner>
+              <LoginH2>Login</LoginH2>
+              <FormGroup>
+                  <Label htmlFor='email'>Email:</Label>
+                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' />
+              </FormGroup>
+              <FormGroup>
+                  <Label htmlFor='password'>Password:</Label>
+                  <LoginInput type='password' name ='password' id='password' placeholder='Password' />
+              </FormGroup>
+              <LoginSubmit  type='submit' />
+              
+          </FormInner>
+          
+      </LogForm>
+      <button type='submit' onClick=''>submit</button>
+      </>
+  )
+}
+
+export default LoginForm;
+
+const LogForm = styled.form`
     display: block;
     position: relative;
     margin: 20px;
@@ -129,24 +154,3 @@ function LoginForm({ Login, error }) {
       background-position: 100% 0%;
     }
   `;
-  return (
-    <>
-      <LogForm submit={submitHandler}>
-          <FormInner>
-              <LoginH2>Login</LoginH2>
-              <FormGroup>
-                  <Label htmlFor='email'>Email:</Label>
-                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' />
-              </FormGroup>
-              <FormGroup>
-                  <Label htmlFor='password'>Password:</Label>
-                  <LoginInput type='password' name ='password' id='password' placeholder='Password' />
-              </FormGroup>
-              <LoginSubmit type='submit' />
-          </FormInner>
-      </LogForm>
-      </>
-  )
-}
-
-export default LoginForm;
