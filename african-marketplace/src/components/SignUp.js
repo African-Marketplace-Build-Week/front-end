@@ -12,6 +12,9 @@ import styled from "styled-components";
 import "../styles/styles.css";
 import * as yup from "yup";
 import validationForm from "./validationForm";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 
 let initialValues = {
   name: "",
@@ -30,39 +33,55 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 100vh;
+
+  .MuiAppBar-colorPrimary {
+    color: black;
+    background-color: #ffd7c0;
+    background-image: linear-gradient(0deg, #ffd7c0 0%, #e09d74 100%);
+  }
+
+  .navtitle {
+    flex-grow: 1;
+  }
+`;
+
 const Form = styled.form`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 300;
-  color: white;
-  background-image: url("https://images7.alphacoders.com/912/912808.jpg");
-  background-position: 50% 30%;
+  color: #2b2b2b;
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
   background-size: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 100vw;
-  height: 100vh;
-  padding: 50px;
-  align-items: space-between;
-  justify-content: space-between;
+  max-width: 100%;
+  align-items: space-evenly;
+  justify-content: space-evenly;
   align-content: center;
-  justify-items: space-between;
+  justify-items: space-evenly;
+  flex-grow: 1;
 
   h1 {
     font-size: 1.4rem;
-    padding: 3px;
+    padding: 1%;
     font-weight: 300;
     background: rgb(43, 43, 46);
     background: linear-gradient(
       53deg,
       rgba(43, 43, 46, 1) 0%,
-      rgba(0, 0, 0, 0.5914740896358543) 0%
+      rgba(255, 255, 255, 0.39539565826330536) 0%
     );
     border-radius: 3px;
     display: flex;
     justify-content: center;
-    margin: 0 30px 10px 30px;
   }
   .errors {
     border-radius: 3px;
@@ -71,7 +90,7 @@ const Form = styled.form`
     background: linear-gradient(
       53deg,
       rgba(43, 43, 46, 1) 0%,
-      rgba(0, 0, 0, 0.5914740896358543) 0%
+      rgba(255, 255, 255, 0.39539565826330536) 0%
     );
   }
   .formControl {
@@ -86,18 +105,14 @@ const Form = styled.form`
     width: 25%;
   }
 
-  .MuiInputBase-input {
-    color: white;
-  }
   .formchild {
     border-radius: 3px;
-    color: white;
     width: 60%;
     background: rgb(43, 43, 46);
     background: linear-gradient(
       53deg,
       rgba(43, 43, 46, 1) 0%,
-      rgba(0, 0, 0, 0.5914740896358543) 0%
+      rgba(255, 255, 255, 0.39539565826330536) 0%
     );
   }
   textarea {
@@ -300,7 +315,7 @@ export default function Signup() {
             <div>{formErrors.country}</div> */}
           </div>
         </div>
-      </div>
-    </Form>
+      </Form>
+    </Main>
   );
 }
