@@ -41,13 +41,11 @@ const Main = styled.div`
   box-sizing: border-box;
   max-width: 100%;
   height: 100vh;
-
   .MuiAppBar-colorPrimary {
     color: black;
     background-color: #ffd7c0;
     background-image: linear-gradient(0deg, #ffd7c0 0%, #e09d74 100%);
   }
-
   .navtitle {
     flex-grow: 1;
   }
@@ -69,7 +67,6 @@ const Form = styled.form`
   align-content: center;
   justify-items: space-evenly;
   flex-grow: 1;
-
   h1 {
     font-size: 1.4rem;
     padding: 1%;
@@ -98,14 +95,12 @@ const Form = styled.form`
     width: 50%;
     max-height: 50px;
   }
-
   .formControl div {
     min-width: 80%;
   }
   .submitContainer {
     width: 25%;
   }
-
   .formchild {
     border-radius: 3px;
     width: 60%;
@@ -174,6 +169,7 @@ export default function Signup() {
   };
 
   const submitForm = () => {
+    push('/login')
     const newUser = {
       name: values.name.trim(),
       email: values.email.trim(),
@@ -186,7 +182,7 @@ export default function Signup() {
 
   //Registration Submit ---------------------
   const postNewUser = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     axiosWithAuth()
       .post("/users/register", values)
       .then((response) => {

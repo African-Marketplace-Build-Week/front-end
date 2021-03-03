@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+*{
+  box-sizing: border-box;
+}
+
+body{
+    background: #F8F9FA;
+    color: #626262;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.hello {
+    font-weight: bolder;
+    font-style: italic;
+}
+
+
+
+.cards-container {
+    display: flex;
+
+}
+
+.title-h1 {
+    font-size: 2.5rem;
+    margin: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #b3aeae;
+}
+
+.market-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 0 0 70%;
+}
+
+.item-card {
+    padding: 2rem;
+    padding-top: 0.8rem;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    width: 26rem;
+
+}
+
+.item-div {
+    margin: 1rem;
+    
+}
+.itemName {
+    font-size: 1.8rem;
+    font-family: 'Archivo Black', sans-serif;
+    color: #3a3838;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    
+    
+}
+
+.category {
+    font-size: 0.8rem;
+    margin: -1.2rem;
+    text-align: center;
+}
+
+.flex-div {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #b3aeae;
+    justify-content: center;
+    
+    
+}
+
+.high {
+padding: 0.6rem;
+background: #9F2326;
+color: #FBFBFB;
+font-size: 0.9rem;
+margin: 0.4rem;
+
+}
+.low {
+    padding: 0.6rem;
+    background: #797777;
+    color: #FBFBFB;
+    font-size: 0.9rem;
+    margin: 0.4rem;
+    
+    }
+
+.expires-in {
+    padding: 0.6rem;
+    margin: 0.4rem;
+    background: #C9C0C0;
+    color: #FBFBFB;
+    font-size: 0.9rem;
+}
+
+.seller {
+    font-size: 0.8rem;
+    color: #797777;
+}
+
+.new-item-form {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.other {
+    background: #faf8f8;
+    border-radius: 4px;
+    
+}
+
+.purchase {
+    padding: 0.6rem;
+    background: #699851;
+    color: #FBFBFB;
+    font-size: 0.9rem;
+    margin: 0.4rem;
+    cursor: pointer;
+    
+    }
+    .contact-seller {
+        padding: 0.6rem;
+        background: #699851;
+        color: #FBFBFB;
+        font-size: 0.9rem;
+        margin: 0.4rem;
+        cursor: pointer;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            
+    
+        }
+
+        .new-item-form1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid grey;
+            border-top: 1px solid grey;
+        }
+
+        .new-item-form1 h2 {
+            font-size: 1.2rem;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bolder;
+
+        }
+
+        input[type=text] {
+            padding: 0.3rem;
+            margin: 0.5rem;
+            font-family:inherit;
+            font-size: inherit;
+            width: 100%;
+            border:0;
+            box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+            border-radius: 0.7rem;
+            outline: none;
+
+        }
+
+        .new-item-form1 select {
+            margin: 0.5rem;
+            outline: none;
+            border:0;
+            box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+            width: 100%;
+            text-align: center;
+            font-family:inherit;
+            font-size: inherit;
+            color: #626262;
+
+        }
+
+        .new-item-form1 button {
+            padding: 0.6rem;
+            background: #699851;
+            color: #FBFBFB;
+            font-size: 1.1rem;
+            margin: 0.4rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .home-link {
+            margin-top: 1.3rem;
+        }
+
+        .homeBtn {
+            padding: 0.6rem;
+    background: #1E3716;
+    color: #FBFBFB;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    cursor: pointer;
+    border: none;
+        }
+
+        
