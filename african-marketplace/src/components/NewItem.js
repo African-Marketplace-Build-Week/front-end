@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { marketplaceArray } from '../data/Data'
 import YourItem from './YourItem'
 
 const initialValues = {
@@ -16,7 +15,6 @@ export default function MarketItemList(props) {
 const [item, setItem] = useState(initialValues);
 
 const onChange = (e) => {
-  e.preventDefault();
   setItem({
     ...item,
     [e.target.name]: e.target.value,
@@ -31,13 +29,7 @@ const onSubmit = (e) => {
     <YourItem />
   )
 }
-
-
-
-
-
-
-     
+ 
     return (
       <div className='form-container'>
       <form onSubmit={onSubmit} className='new-item-form1'>
@@ -70,7 +62,7 @@ onChange={onChange}>
 <input 
 type='text'
 name='inventory'
-onchange={onChange}
+onChange={onChange}
 placeholder='Inventory...'
  />
 
@@ -88,13 +80,42 @@ onChange={onChange}
 placeholder='Seller Name...'
  />
 
- <button type='submit'>submit</button>
+ <button type='submit' onClick={onChange}>submit</button>
   </form>
 
   <div className='your-items'>
-    <h2>Your Items: </h2>
-    <p> { item.itemName } </p>
+    <h3>Preview Your here: </h3>
+  <div className='hideMe'>
+  <div className='item-card'>
+      <div className='item-div'>
+      <h3 className='itemName'>{item.itemName}</h3>
+      </div>
+      <div className='item-div'>
+      <p className='category'>{item.category}</p>
+        </div>
+        <div className='item-div flex-div'>
+          <div className={item.demand}> in {item.demand} demand</div>
+          <div className='expires-in'> expires in {item.expires} days</div>
+        </div>
+        <div className='item-div other'>
+        <p><span className='seller'>Inventory:</span> <br /> 
+        {item.inventory}</p>
+        </div>
+        <div className='item-div other'>
+        <p><span className='seller'>Marketplace:</span> <br /> 
+        {item.marketName}</p>
+        </div>
+        <div className='item-div other'>
+        <p><span className='seller'>Seller:</span> <br /> 
+        {item.sellerName}</p>
+        </div>
+        <div className='item-div flex-div'>
+        <div className='purchase'>purchase</div>
+          <div className='contact-seller'>contact seller</div>
+        </div>
+      </div>
   </div>
+      </div>
       </div>
     );
   }

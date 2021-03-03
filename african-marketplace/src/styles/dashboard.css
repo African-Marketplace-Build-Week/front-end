@@ -46,6 +46,7 @@ body{
     flex-direction: column;
     margin: 1rem;
     width: 26rem;
+
 }
 
 .item-div {
@@ -198,3 +199,5 @@ margin: 0.4rem;
             cursor: pointer;
             border: none;
         }
+
+        

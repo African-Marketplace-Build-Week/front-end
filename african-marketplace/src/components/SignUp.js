@@ -226,7 +226,7 @@ export default function Signup() {
   }, [values]);
 
   return (
-    <Form className="form container" onSubmit={submitRegistration}>
+    <Main className="form container" onSubmit={submitRegistration}>
       <h1>Sign Up Now It's Free!</h1>
       <TextField
         className="formchild"
@@ -271,7 +271,7 @@ export default function Signup() {
         variant="outlined"
         size="small"
       />
-      <div className="innerContainer">
+      <Form className="innerContainer">
         <FormControl className="formControl">
           <InputLabel id="demo-simple-select-label">Country</InputLabel>
           <Select

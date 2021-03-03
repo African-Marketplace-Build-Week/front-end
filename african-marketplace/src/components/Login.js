@@ -131,7 +131,7 @@ function LoginForm({ Login, error }) {
   `;
   return (
     <>
-      <LogForm>
+      <LogForm submit={submitHandler}>
           <FormInner>
               <LoginH2>Login</LoginH2>
               <FormGroup>
