@@ -16,6 +16,8 @@ body{
     font-style: italic;
 }
 
+
+
 .cards-container {
     display: flex;
 
@@ -111,6 +113,9 @@ margin: 0.4rem;
 
 .new-item-form {
     flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .other {
@@ -198,6 +203,20 @@ margin: 0.4rem;
             margin: 0.4rem;
             cursor: pointer;
             border: none;
+        }
+
+        .home-link {
+            margin-top: 1.3rem;
+        }
+
+        .homeBtn {
+            padding: 0.6rem;
+    background: #1E3716;
+    color: #FBFBFB;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    cursor: pointer;
+    border: none;
         }
 
         
