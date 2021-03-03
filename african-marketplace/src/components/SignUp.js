@@ -10,7 +10,6 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import axios from "axios";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import "../styles/styles.css";
 import * as yup from "yup";
 import validationForm from "./validationForm";
@@ -46,15 +45,11 @@ const Main = styled.div`
   .MuiAppBar-colorPrimary {
     color: black;
     background-color: #ffd7c0;
-background-image: linear-gradient(0deg, #ffd7c0 0%, #e09d74 100%);
-
+    background-image: linear-gradient(0deg, #ffd7c0 0%, #e09d74 100%);
   }
 
   .navtitle {
     flex-grow: 1;
-  }
-
-
   }
 `;
 
