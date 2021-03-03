@@ -56,6 +56,14 @@ function LoginForm({ Login, error }) {
     border-width: 20px;
     border-image: url(${border});
     border-image-slice: 80;
+    @media (max-width: 800px) {
+      width: 70%;
+    }
+    @media (max-width: 450px) {
+      border-image: none;
+      border: none;
+      width: 80%;
+    }
   `;
   const FormInner = styled.form`
     position: relative;
@@ -71,6 +79,9 @@ function LoginForm({ Login, error }) {
     font-weight: bold;
     margin-bottom: 30px;
     font-family: 'Lobster';
+    @media (max-width: 450px) {
+      font-size: 1.5rem;
+    }
   `;
   const FormGroup = styled.div`
     display: block;
@@ -82,6 +93,9 @@ function LoginForm({ Login, error }) {
     color: black;
     font-size: 1.2rem;
     font-family: 'Poppins';
+    @media (max-width: 450px) {
+      font-size: 1rem;
+    }
   `;
   const LoginInput = styled.input`
     display: block;
@@ -92,6 +106,12 @@ function LoginForm({ Login, error }) {
     transition: .3s;
     &:focus {
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 800px) {
+      width: 37vw;
+    }
+    @media (max-width: 450px) {
+      width: 70vw;
     }
   `;
   const LoginSubmit = styled.input`
