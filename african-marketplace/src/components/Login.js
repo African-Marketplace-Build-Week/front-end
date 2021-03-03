@@ -54,7 +54,7 @@ function LoginForm({ Login, error }) {
     text-shadow: 1px 1px 1px white;
     font-weight: bold;
     margin-bottom: 30px;
-    font-family: 'Poppins';
+    font-family: 'Lobster';
   `;
   const FormGroup = styled.div`
     display: block;
@@ -65,10 +65,11 @@ function LoginForm({ Login, error }) {
   const Label = styled.label`
     color: black;
     font-size: 1.2rem;
+    font-family: 'Poppins';
   `;
   const LoginInput = styled.input`
     display: block;
-    width: 100%;
+    width: 20vw;
     padding: 10px 15px;
     background-color: #d8d7d7;
     border-radius: 8px;
@@ -87,6 +88,7 @@ function LoginForm({ Login, error }) {
     transition: .5s;
     color: white;
     font-weight: bold;
+    font-family: 'Poppins';
     cursor: pointer;
     &:hover {
       background-position: 100% 0%;

@@ -71,6 +71,7 @@ export default function Home(props) {
       outline-color: rgba(255, 255, 255, .5);
       outline-offset: 0px;
       text-shadow: none;
+      font-family: 'Poppins';
       transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
       &:hover {
         border: 1px solid;
@@ -84,7 +85,7 @@ export default function Home(props) {
 
   const Title = styled.h1`
     font-size: 3rem;
-    font-family: 'Poppins';
+    font-family: 'Lobster';
     color: rgb(182, 81, 81);
     text-shadow: 2px 2px 2px white;
     animation-name: ${fadeIn};
