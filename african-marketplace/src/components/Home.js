@@ -31,12 +31,19 @@ export default function Home(props) {
 
   const ImageBox = styled.div`
     background-image: url(${image});
-    background-size: 100% 100vh;
+    background-size: 100% 100%;
+    background-position: center;
     background-repeat: no-repeat;
     width: 40%;
     height: 100vh;
     animation-name: ${slideDown};
     animation-duration: 1s;
+    @media (max-width: 1200px) {
+      background-size: auto 100%;
+    }
+    @media (max-width: 450px) {
+      display: none;
+    }
   `;
 
   const Container = styled.div`
@@ -50,6 +57,10 @@ export default function Home(props) {
     color: white;
     animation-name: ${slideLeft};
     animation-duration: 1s;
+    @media (max-width: 450px) {
+      width: 100vw;
+      justify-content: center;
+    }
   `;
 
   const Nav = styled.nav`
@@ -73,6 +84,10 @@ export default function Home(props) {
       text-shadow: none;
       font-family: 'Poppins';
       transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+      @media (max-width: 450px) {
+        padding: 5px 15px;
+        font-size: .7rem;
+      }
       &:hover {
         border: 1px solid;
         box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
@@ -81,6 +96,7 @@ export default function Home(props) {
         text-shadow: 1px 1px 2px #427388;
       }
     }
+    
   `;
 
   const Title = styled.h1`
@@ -90,6 +106,10 @@ export default function Home(props) {
     text-shadow: 2px 2px 2px white;
     animation-name: ${fadeIn};
     animation-duration: 2s;
+    @media (max-width: 450px) {
+      font-size: 2rem;
+      margin: 50px 0;
+    }
   `;
 
   
