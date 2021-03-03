@@ -3,7 +3,7 @@ import { marketplaceArray } from '../data/Data'
 
 const initialValues = {
         category: "",
-        name: "",
+        itemName: "",
         sellerName: "",
         marketName:"",
         expires: "7",
@@ -15,24 +15,36 @@ export default function MarketItemList(props) {
 const [item, setItem] = useState(initialValues);
 
 const onChange = (e) => {
+  e.preventDefault();
   setItem({
     ...item,
     [e.target.name]: e.target.value,
   });
-  console.log('Items:', item)
+  console.log(item)
+
 };
-    
+
+
+
+
+
+
+     
     return (
       <div className='form-container'>
-      <form>
+      <form className='new-item-form1'>
 <h2>Add new Item: </h2>
 <input 
 type='text'
-name='name'
-onchange={onChange}
+name='itemName'
+onChange={ onChange }
 placeholder='Item Name...'
  />
-<select className='select-category' name='category' onChange={onChange}>
+
+
+<select className='select-category' 
+name='category' 
+onChange={onChange}>
 
   <option value=''>- select -</option>
   <option value='Animal Products'>Animal Products</option>
@@ -46,7 +58,35 @@ placeholder='Item Name...'
   <option value='Seeds & Nuts'>Seeds & Nuts</option>
   <option value='Vegetables'>Vegetables</option>
 </select>
-      </form>
+
+<input 
+type='text'
+name='inventory'
+onchange={onChange}
+placeholder='Inventory...'
+ />
+
+<input 
+type='text'
+name='marketName'
+onChange={onChange}
+placeholder='Market Name...'
+ />
+
+<input 
+type='text'
+name='sellerName'
+onChange={onChange}
+placeholder='Seller Name...'
+ />
+
+ <button onClick={onChange}>submit</button>
+  </form>
+
+  <div className='your-items'>
+    <h2>Your Items: </h2>
+  </div>
       </div>
     );
   }
+

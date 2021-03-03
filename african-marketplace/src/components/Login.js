@@ -9,9 +9,24 @@ function LoginForm({ Login, error }) {
 
   const { push } = useHistory();
 
+  const onChange = (e) => {
+    e.preventDefault();
+    setDetails({
+      ...details,
+      [e.target.name]: e.target.value,
+    });
+    console.log(details)
+  
+  };
+ 
+  const testSubmit = (e) => {
+    push('/dashboard')
+  }
+
 //Submit Handler posts to Login
   const submitHandler = (e) => {
     e.preventDefault();
+    push('/dashboard')
     axiosWithAuth()
       .post("/users/login", details)
       .then((res) => {
@@ -97,23 +112,20 @@ function LoginForm({ Login, error }) {
   `;
   return (
     <>
-      <LogForm onSubmit={submitHandler}>
+      <LogForm>
           <FormInner>
               <LoginH2>Login</LoginH2>
               <FormGroup>
                   <Label htmlFor='email'>Email:</Label>
-                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={e => setDetails({...details, email: e.target.value})} value={details.email}/>
+                  <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={onChange} value={details.email}/>
               </FormGroup>
               <FormGroup>
                   <Label htmlFor='password'>Password:</Label>
-                  <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
+                  <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={onChange} value={details.password}/>
               </FormGroup>
-              <LoginSubmit type='submit' value='Log In' />
+              <LoginSubmit type='submit' />
           </FormInner>
       </LogForm>
-      <form onSubmit={submitHandler}>
-<button>test</button>
-      </form>
       </>
   )
 }
