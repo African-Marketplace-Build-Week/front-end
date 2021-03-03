@@ -1,122 +1,147 @@
 import React, { useState } from 'react'
-import YourItem from './YourItem'
+import axiosWithAuth from "../utils/axiosWithAuth";
+import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
+import border from '../styles/images/border.png';
 
-const initialValues = {
-        category: "",
-        itemName: "",
-        sellerName: "",
-        marketName:"",
-        expires: "7",
-        inventory: "",
-        demand: "low",
-}
 
-export default function MarketItemList(props) {
-const [item, setItem] = useState(initialValues);
+  const LogForm = styled.form`
+    display: block;
+    position: relative;
+    margin: 20px;
+    width: 40%;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    border-style: solid;
+    border-width: 20px;
+    border-image: url(${border});
+    border-image-slice: 80;
+    @media (max-width: 800px) {
+      width: 70%;
+    }
+    @media (max-width: 450px) {
+      border-image: none;
+      border: none;
+      width: 80%;
+    }
+  `;
+  const FormInner = styled.form`
+    position: relative;
+    display: block;
+    z-index: 2;
+    ;
+    padding: 30px;
+  `;
+  const LoginH2 = styled.h2`
+    color: rgb(182, 81, 81);
+    font-size: 2rem;
+    text-shadow: 1px 1px 1px white;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-family: 'Lobster';
+    @media (max-width: 450px) {
+      font-size: 1.5rem;
+    }
+  `;
+  const FormGroup = styled.div`
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+    text-align: left;
+  `;
+  const Label = styled.label`
+    color: black;
+    font-size: 1.2rem;
+    font-family: 'Poppins';
+    @media (max-width: 450px) {
+      font-size: 1rem;
+    }
+  `;
+  const LoginInput = styled.input`
+    display: block;
+    width: 20vw;
+    padding: 10px 15px;
+    background-color: #d8d7d7;
+    border-radius: 8px;
+    transition: .3s;
+    &:focus {
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 800px) {
+      width: 37vw;
+    }
+    @media (max-width: 450px) {
+      width: 70vw;
+    }
+  `;
+  const LoginSubmit = styled.input`
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 3px;
+    background-image: linear-gradient(to right, rgb(182, 81, 81) 50%, rgb(182, 81, 81) 50%, #ffffff);
+    background-size: 200%;
+    background-position: 0%;
+    transition: .5s;
+    color: white;
+    font-weight: bold;
+    font-family: 'Poppins';
+    cursor: pointer;
+    &:hover {
+      background-position: 100% 0%;
+    }
+  `;
+  
+function LoginForm({ Login, error }) {
+  const [details, setDetails] = useState({email: '', password: ''});
 
-const onChange = (e) => {
-  setItem({
-    ...item,
-    [e.target.name]: e.target.value,
-  });
-  console.log(item)
+  const { push } = useHistory();
 
-};
+//Submit Handler posts to Login
+  const submitHandler = (e) => {
+    push('/dashboard')
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/users/login", details)
+      .then((res) => {
+        console.log("Login Details: ", res);
+        localStorage.setItem("token", res.data.token);
+        push(); 
+      })
+      .catch((err) => {
+        console.log(
+          "Error:", 
+          err.response.data.message
+        );
+      });
+  };
 
-const onSubmit = (e) => {
-  e.preventDefault();
+//onChange handler
+  const changeHandler = e => {
+    const { value, name } = e.target;
+    setDetails({ ...details, [name]: value})
+  };
+
   return (
-    <YourItem />
+      <LogForm onSubmit={submitHandler}>
+          <FormInner>
+              <LoginH2>Login</LoginH2>
+              <FormGroup>
+                  <Label htmlFor='email'>Email:
+                    <LoginInput type='email' name ='email' id='email' placeholder='Email Address' onChange={changeHandler} value={details.email}/>
+                  </Label>
+              </FormGroup>
+              <FormGroup>
+                  <Label htmlFor='password'>Password:
+                    <LoginInput type='password' name ='password' id='password' placeholder='Password' onChange={changeHandler} value={details.password}/>
+                  </Label>
+              </FormGroup>
+              <LoginSubmit type='submit' value='Log In' onClick={push('/dashboard')} />
+          </FormInner>
+      </LogForm>
   )
 }
- 
-    return (
-      <div className='form-container'>
-      <form onSubmit={onSubmit} className='new-item-form1'>
-<h2>Add new Item: </h2>
-<input 
-type='text'
-name='itemName'
-onChange={ onChange }
-placeholder='Item Name...'
- />
 
-
-<select className='select-category' 
-name='category' 
-onChange={onChange}>
-
-  <option value=''>- select -</option>
-  <option value='Animal Products'>Animal Products</option>
-  <option value='Beans'>Beans</option>
-  <option value='Cereals-Maize'>Cereals-Maize</option>
-  <option value='Cereals-Other'>Cereals-Other</option>
-  <option value='Cereals-Rice'>Cereals-Rice</option>
-  <option value='Fruits'>Fruits</option>
-  <option value='Peas'>Peas</option>
-  <option value='Roots & Tubers'>Roots & Tubers</option>
-  <option value='Seeds & Nuts'>Seeds & Nuts</option>
-  <option value='Vegetables'>Vegetables</option>
-</select>
-
-<input 
-type='text'
-name='inventory'
-onChange={onChange}
-placeholder='Inventory...'
- />
-
-<input 
-type='text'
-name='marketName'
-onChange={onChange}
-placeholder='Market Name...'
- />
-
-<input 
-type='text'
-name='sellerName'
-onChange={onChange}
-placeholder='Seller Name...'
- />
-
- <button type='submit' onClick={onChange}>submit</button>
-  </form>
-
-  <div className='your-items'>
-    <h3>Preview Your here: </h3>
-  <div className='hideMe'>
-  <div className='item-card'>
-      <div className='item-div'>
-      <h3 className='itemName'>{item.itemName}</h3>
-      </div>
-      <div className='item-div'>
-      <p className='category'>{item.category}</p>
-        </div>
-        <div className='item-div flex-div'>
-          <div className={item.demand}> in {item.demand} demand</div>
-          <div className='expires-in'> expires in {item.expires} days</div>
-        </div>
-        <div className='item-div other'>
-        <p><span className='seller'>Inventory:</span> <br /> 
-        {item.inventory}</p>
-        </div>
-        <div className='item-div other'>
-        <p><span className='seller'>Marketplace:</span> <br /> 
-        {item.marketName}</p>
-        </div>
-        <div className='item-div other'>
-        <p><span className='seller'>Seller:</span> <br /> 
-        {item.sellerName}</p>
-        </div>
-        <div className='item-div flex-div'>
-        <div className='purchase'>purchase</div>
-          <div className='contact-seller'>contact seller</div>
-        </div>
-      </div>
-  </div>
-      </div>
-      </div>
-    );
-  }
-
+export default LoginForm;
