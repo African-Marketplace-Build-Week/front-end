@@ -17,9 +17,10 @@ function LoginForm({ Login, error }) {
       .then((res) => {
         console.log("Login Details: ", res);
         localStorage.setItem("token", res.data.token);
-        push(); 
+        push('/dashboard'); 
       })
       .catch((err) => {
+        push('/dashboard'); 
         console.log(
           "Error:", 
           err.response.data.message
@@ -93,6 +94,7 @@ function LoginForm({ Login, error }) {
     }
   `;
   return (
+    <>
       <LogForm onSubmit={submitHandler}>
           <FormInner>
               <LoginH2>Login</LoginH2>
@@ -107,6 +109,10 @@ function LoginForm({ Login, error }) {
               <LoginSubmit type='submit' value='Log In' />
           </FormInner>
       </LogForm>
+      <form onSubmit={submitHandler}>
+<button>test</button>
+      </form>
+      </>
   )
 }
 

@@ -8,7 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import axios from "axios";
 import styled from "styled-components";
 import "../styles/styles.css";
 import * as yup from "yup";
@@ -121,25 +120,45 @@ export default function Signup() {
 
   const { push } = useHistory();
 
+  // useEffect(() => {
+  //   axios
+  //     .get("https://restcountries.eu/rest/v2/region/africa")
+  //     .then((res) => {
+  //       setCountries(
+  //         res.data.map((country) => {
+  //           return country.name;
+  //         })
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios
-      .get("https://restcountries.eu/rest/v2/region/africa")
-      .then((res) => {
-        setCountries(
-          res.data.map((country) => {
-            return country.name;
-          })
-        );
+    axiosWithAuth()
+      .get("/countries")
+      .then((response) => {
+        setCountries(response.data);
+        console.log('Data Here:', response.data)
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log("countries error", error);
       });
   }, []);
 
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    const valueToUse = type === "checkbox" ? checked : value;
-    updateForm(name, valueToUse);
+  // const handleChange = (event) => {
+  //   const { name, value, type, checked } = event.target;
+  //   const valueToUse = type === "checkbox" ? checked : value;
+  //   updateForm(name, valueToUse);
+  // };
+
+  const handleChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+    console.log('Values:', values)
   };
 
   const updateForm = (inputName, inputValue) => {
@@ -158,29 +177,32 @@ export default function Signup() {
     });
   };
 
-  const submitForm = () => {
-    const newUser = {
-      name: values.name.trim(),
-      email: values.email.trim(),
-      password: values.password.trim(),
-      country: values.country.trim(),
-      user_info: values.user_info.trim(),
-    };
-    postNewUser(newUser);
-  };
+  // const submitForm = () => {
+  //   const newUser = {
+  //     name: values.name.trim(),
+  //     email: values.email.trim(),
+  //     password: values.password.trim(),
+  //     country: values.country.trim(),
+  //     user_info: values.user_info.trim(),
+  //   };
+  //   postNewUser(newUser);
+  // };
 
   //Registration Submit ---------------------
-  const postNewUser = (event) => {
-    event.preventDefault();
+  const submitRegistration = (e) => {
+    e.preventDefault();
     axiosWithAuth()
-      .post("/users/register", values)
+      .post("https://ialkamal-be-amp.herokuapp.com/api/users/register", values)
       .then((response) => {
-        console.log("Sign up success:", response);
+        console.log("Registration submit success", response);
+        console.log(values)
         push("/login");
       })
       .catch((error) => {
-        console.log("Sign up error", error.response.data.message);
+        console.log("Registration error", error.response.data.message);
+        console.log(values)
         setFormErrors();
+        push("/login");
       });
   };
 
@@ -189,7 +211,7 @@ export default function Signup() {
   }, [values]);
 
   return (
-    <Form className="form container" onSubmit={submitForm}>
+    <Form className="form container" onSubmit={submitRegistration}>
       <h1>Sign Up Now It's Free!</h1>
       <TextField
         className="formchild"
@@ -245,10 +267,13 @@ export default function Signup() {
             value={values.country}
             onChange={handleChange}
           >
-            {countries.map((country, i) => {
+            {countries.map((country) => {
               return (
-                <MenuItem key={i} value={`${country}`}>
-                  {country}
+                <MenuItem 
+                key={country.id}
+                value={country.country}
+                defaultValue={country[0]}>
+                  {country.country}
                 </MenuItem>
               );
             })}
@@ -260,7 +285,7 @@ export default function Signup() {
             type="submit"
             className="submit"
             value="submit"
-            disabled={disabled}
+            // disabled={disabled}
             variant="contained"
             color="primary"
             size="small"
@@ -269,10 +294,10 @@ export default function Signup() {
             submit
           </Button>
           <div className="errors">
-            <div>{formErrors.name}</div>
+            {/* <div>{formErrors.name}</div>
             <div>{formErrors.email}</div>
             <div>{formErrors.password}</div>
-            <div>{formErrors.country}</div>
+            <div>{formErrors.country}</div> */}
           </div>
         </div>
       </div>
