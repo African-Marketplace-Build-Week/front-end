@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import border from '../styles/images/border.png';
-
+import border from "../styles/images/border.png";
 
   const LogForm = styled.form`
     display: block;
@@ -108,6 +107,8 @@ function LoginForm({ Login, error }) {
       .then((res) => {
         console.log("Login Details: ", res);
         localStorage.setItem("token", res.data.token);
+
+
         push(); 
       })
       .catch((err) => {
