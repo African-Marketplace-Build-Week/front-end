@@ -42,12 +42,84 @@ const Main = styled.div`
   max-width: 100%;
   height: 100vh;
   .MuiAppBar-colorPrimary {
-    color: black;
-    background-color: #ffd7c0;
-    background-image: linear-gradient(0deg, #ffd7c0 0%, #e09d74 100%);
+    color: white;
+    background-color: #441052;
   }
   .navtitle {
     flex-grow: 1;
+  }
+
+  @keyframes move_wave {
+    0% {
+      transform: translateX(0) translateZ(0) scaleY(1);
+    }
+    50% {
+      transform: translateX(-25%) translateZ(0) scaleY(0.55);
+    }
+    100% {
+      transform: translateX(-50%) translateZ(0) scaleY(1);
+    }
+  }
+  .waveWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+  }
+  .waveWrapperInner {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    bottom: -1px;
+    background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);
+  }
+  .bgTop {
+    z-index: 15;
+    opacity: 0.5;
+  }
+  .bgMiddle {
+    z-index: 10;
+    opacity: 0.75;
+  }
+  .bgBottom {
+    z-index: 5;
+  }
+  .wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+  }
+  .waveTop {
+    background-image: url("http://front-end-noobs.com/jecko/img/wave-top.png");
+    background-size: 50% 100px;
+  }
+  .waveAnimation .waveTop {
+    animation: move-wave 3s;
+    -webkit-animation: move-wave 3s;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+  }
+  .waveMiddle {
+    background-size: 50% 120px;
+    background-image: url("http://front-end-noobs.com/jecko/img/wave-mid.png");
+  }
+  .waveAnimation .waveMiddle {
+    animation: move_wave 10s linear infinite;
+  }
+  .waveBottom {
+    background-size: 50% 100px;
+    background-image: url("http://front-end-noobs.com/jecko/img/wave-bot.png");
+  }
+  .waveAnimation .waveBottom {
+    animation: move_wave 15s linear infinite;
   }
 `;
 
@@ -55,7 +127,7 @@ const Form = styled.form`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 300;
   color: #2b2b2b;
-  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+  background: rgba(0, 0, 0, 0);
   background-size: 100%;
   box-sizing: border-box;
   display: flex;
@@ -66,6 +138,7 @@ const Form = styled.form`
   justify-content: space-evenly;
   align-content: center;
   justify-items: space-evenly;
+  z-index: 100;
   flex-grow: 1;
   h1 {
     font-size: 1.4rem;
@@ -169,7 +242,7 @@ export default function Signup() {
   };
 
   const submitForm = () => {
-    push('/login')
+    push("/login");
     const newUser = {
       name: values.name.trim(),
       email: values.email.trim(),
@@ -215,6 +288,7 @@ export default function Signup() {
         <h1>Sign Up Now It's Free!</h1>
         <TextField
           className="formchild"
+          type="name"
           name="name"
           label="Name"
           value={values.name}
@@ -299,6 +373,17 @@ export default function Signup() {
           </div>
         </div>
       </Form>
+      <div className="waveWrapper waveAnimation">
+        <div className="waveWrapperInner bgTop">
+          <div className="wave waveTop"></div>
+        </div>
+        <div className="waveWrapperInner bgMiddle">
+          <div className="wave waveMiddle"></div>
+        </div>
+        <div className="waveWrapperInner bgBottom">
+          <div className="wave waveBottom"></div>
+        </div>
+      </div>
     </Main>
   );
 }
