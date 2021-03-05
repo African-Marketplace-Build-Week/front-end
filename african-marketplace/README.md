@@ -4,14 +4,14 @@ Our team consisted of 3 students:
         Jonathan Calderon
         Nicholas Samples
     UNIT 3 --
-        Catherine Radin
+        Catherine Radin-Schneider
 
 In order to view our webpage properly, ensure that node dependencies are installed by typing "npm install" in your terminal, followed by "npm start".
 The page should launch on localhost:3000
 
 Homepage and login form by Nicholas Samples
 Sign-up page and sign-up form by Jonathan Calderon
-User dashboard, Redux, connection to back-end by Catherine Radin
+User dashboard, Redux, connection to back-end by Catherine Radin-Schneider
 
 
 ----------- CreateReactApp info -------------
